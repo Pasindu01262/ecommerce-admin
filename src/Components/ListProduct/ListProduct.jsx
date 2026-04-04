@@ -5,23 +5,22 @@ import cross_icon from '../../assets/cross_icon.png';
 function ListProduct() {
   const [allproducts, setAllproducts] = useState([]);
 
-  const fetchInfo = async () => {
-    try {
-      const res = await fetch('http://localhost:4000/allproducts');
-      const data = await res.json();
-      setAllproducts(data);
-    } catch (err) {
-      console.error("Fetch Error:", err);
-    }
-  };
-
   useEffect(() => {
+    const fetchInfo = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/allproduct`);
+        const data = await res.json();
+        setAllproducts(data);
+      } catch (err) {
+        console.error("Fetch Error:", err);
+      }
+    };
     fetchInfo();
   }, []);
 
   const remove_product = async (id) => {
     try {
-      await fetch('http://localhost:4000/removeproduct', {
+      await fetch(`${import.meta.env.VITE_API_URL}/removeproduct`, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

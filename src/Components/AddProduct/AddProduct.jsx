@@ -35,7 +35,7 @@ function AddProduct() {
     formData.append('product', image);
 
     // FIX 2 — Correct URL
-    await fetch('http://localhost:4000/upload', {
+    await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
       method: 'POST',
       body: formData,
     })
@@ -47,7 +47,7 @@ function AddProduct() {
     if (responseData.success) {
       product.image = responseData.image_url;
       console.log("Final product ready to save:", product);
-      await fetch('http://localhost:4000/addproduct',{
+      await fetch(`${import.meta.env.VITE_API_URL}/addproduct`,{
         method:'POST',
         headers:{
             Accept:'application/json',
